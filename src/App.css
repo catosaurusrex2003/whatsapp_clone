@@ -1,38 +1,202 @@
-.App {
-  text-align: center;
+.app{
+  display : grid;
+  place-items: center;
+  background-color: #dadbd3;
+  height:100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app__body{
+  display:flex;
+  background-color: rgb(141, 141, 228);
+  margin-top :-30px;
+  height:90vh;
+  width:90vw;
+  box-shadow: -1px 4px 20px -6px black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+.sidebar{
+  display :flex;
   flex-direction: column;
+  flex:0.35
+}
+
+.sidebar__header{
+  display: flex;
+  justify-content : space-between;
+  border-right : 1px solid rgb(173, 80, 227);
+  height:60px;
+}
+
+.sidebar__avatar{
+  margin-top: 10px;
+  margin-left : 7px;
+}
+
+.sidebar__headerRight{
+  display : flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content:space-between;
+  min-width:15vw;
+  
+}
+.sidebar__headerRight > .MuiSvgIcon-root{
+  margin-right:2vw;
+  font-size : 24px !important;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar__search{
+  display:flex;
+  align-items: center;
+  background-color: rgb(133, 133, 186);
+  height:34px;
+  padding:10px;
+  /* border-bottom : 2px solid rgb(157, 49, 219); */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar__searchContainer{
+  display:flex;
+  align-items:center;
+  background-color:rgb(244, 244, 249);
+  width:100%;
+  height:30px;
+  border-radius: 20px;
+}
+
+.sidebar__searchContainer >input{
+  border:none;
+  margin-left:10px;
+}
+
+.sidebar__searchContainer > .MuiSvgIcon-root{
+  color : gray;
+  font-size: 24px !important;
+}
+
+.sidebar__chats{
+  flex : 1;
+  background-color : rgb(136, 136, 198);
+  overflow : scroll;
+}
+
+.sidebarChat{
+  display : flex;
+  padding : 20px;
+  cursor:pointer;
+  border-bottom : 1px solid rgb(157, 49, 219);
+}
+
+.sidebar__chats::-webkit-scrollbar {
+  display: none;
+}
+
+
+.sidebarChat:hover{
+  background-color: rgb(170, 170, 216)
+}
+
+.sidebarChat__info > h2{
+  font-size : 17px;
+  margin-bottom: 6px;
+  
+}
+
+.sidebarChat__info{
+  margin-left : 10px;
+}
+
+.chat{
+  flex:0.65;
+  display : flex;
+  flex-direction:column;
+}
+
+.chat__header{
+  padding:10px;
+  display : flex;
+  align-items: center;
+  border-bottom : 1px solid rgb(171, 171, 171);
+  font-weight : 500;
+}
+
+.chat__headerinfo >h3{
+  font-weight : 700;  
+}
+
+.chat__headerRight{
+  display : flex;
+  justify-content: space-between;
+  min-width: 100px;
+  position :relative;
+  margin-left : auto;
+}
+.chat__body{
+  flex:1;
+  background-image: url("https://i.pinimg.com/originals/2a/be/e4/2abee4e7a6adacf15aa8ee6c8931c92e.jpg");
+  /* background-repeat: repeat; */
+  background-size: 70%;
+  padding:30px;
+  overflow:scroll;
+}
+.chat__body::-webkit-scrollbar {
+  display: none;
+}
+
+.chat__message{
+  position:relative;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 8px;
+  width : fit-content;
+  padding:8px;
+  padding-top: 12px;
+  margin-bottom: 25px;
+}
+
+.chat__name{
+  position:absolute;
+  top:-22px;
+  font-size : small;
+  font-weight: 1000;
+  font-size:15px;
+  background-color: rgb(178, 95, 227);
+  padding:2px;
+  border-radius: 8px;
+}
+.chat__timestamp{
+  margin-left:10px;
+  font-size: xx-small;
+  position : relative;
+  top:9px;
+}
+
+.chat__reciever{
+  margin-left : auto;
+  background-color: rgb(133, 189, 133);
+}
+
+.chat__footer{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top : 1px solid rgb(171, 171, 171);
+  height : 50px;
+  padding:10px;
+}
+.chat__footer > form{
+  flex :1;
+  display : flex;
+}
+
+.chat__footer > form > input{
+  flex :1;
+  border-radius : 30px;
+}
+
+.chat__footer > form > button{
+  display : none;  
+}
+
+.chat__footer > .MuiSvgIcon-root{
+  padding : 10px;
+
 }
