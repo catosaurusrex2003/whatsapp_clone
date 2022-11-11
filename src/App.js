@@ -1,34 +1,43 @@
 // import { Switch } from '@mui/material';
-import { Router , Route, Routes, BrowserRouter, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Router, Route, Routes, BrowserRouter, useParams } from 'react-router-dom';
 import './App.css';
 import Chat from './Chat';
+import Login from './login';
 import Sidebar from './Sidebar';
+import { useStateValue } from './Stateprovider';
+
 
 function App() {
+
+  const [{user} , dispatch] = useStateValue()
+
+
   return (
     <div className="app">
-      <div className='app__body'>
-        <BrowserRouter>
-          <Sidebar/>      
+      {!user ? <Login/>
+        :
+        <div className='app__body'>
+          <BrowserRouter>
+            <Sidebar />
             <Routes>
-              <Route 
-                path = '/rooms/:roomsId'
-                element = {
+              <Route path='/rooms/:roomsId'
+                element={
                   <Chat />
                 }
               />
-            <Route 
-                path = '/'
-                element = {
+              <Route path='/'
+                element={
                   <></>
                 }
               />
 
             </Routes>
-        </BrowserRouter>
-        
-        
-      </div>
+          </BrowserRouter>
+
+
+        </div>
+      }
     </div>
   );
 }

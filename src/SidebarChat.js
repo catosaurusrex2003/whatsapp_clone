@@ -28,7 +28,7 @@ export default function SidebarChat({ addnewchat, id, name }) {
     }, [])
 
     return !addnewchat ? (
-        <Link to={`rooms/${id}`}>
+        <Link to={`/rooms/${id}`}>
             <div className='sidebarChat'>
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className='sidebarChat__info'>

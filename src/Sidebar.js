@@ -6,10 +6,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SidebarChat from './SidebarChat';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import db from './firebase';
+import { useStateValue } from './Stateprovider';
+
+
+
 
 export default function Sidebar() {
 
   const [rooms, set_rooms] = useState([])
+
+  const [{user} , dispatch]  = useStateValue()
 
   useEffect(() => { 
     async function getRooms() {
@@ -36,7 +42,7 @@ export default function Sidebar() {
   return (
     <div className='sidebar'>
       <div className='sidebar__header'>
-        <Avatar className='sidebar__avatar' />
+        <Avatar className='sidebar__avatar'  src = {user?.photoURL} />
         <div className='sidebar__headerRight'>
           <IconButton>
             <DonutLarge />
