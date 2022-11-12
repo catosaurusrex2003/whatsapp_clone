@@ -12,6 +12,8 @@ import { actionTypes } from './Reducer';
 function Login() {
     const [{}, dispatch] = useStateValue()
 
+
+
     function signIn() {
         const provider = new GoogleAuthProvider();
         const auth = getAuth();

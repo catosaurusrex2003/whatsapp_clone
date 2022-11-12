@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="app">
       {!user ? <Login/>
-        :
+        : 
         <div className='app__body'>
           <BrowserRouter>
             <Sidebar />
@@ -37,7 +37,7 @@ function App() {
 
 
         </div>
-      }
+      } 
     </div>
   );
 }
