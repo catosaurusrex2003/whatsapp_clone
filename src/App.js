@@ -1,6 +1,6 @@
 // import { Switch } from '@mui/material';
-import { useState } from 'react';
-import { Router, Route, Routes, BrowserRouter, useParams } from 'react-router-dom';
+
+import { Route, Routes, BrowserRouter} from 'react-router-dom';
 import './App.css';
 import Chat from './Chat';
 import Login from './login';
@@ -10,7 +10,7 @@ import { useStateValue } from './Stateprovider';
 
 function App() {
 
-  const [{user} , dispatch] = useStateValue()
+  const [{user} ] = useStateValue()
 
   return (
     <div className="app">

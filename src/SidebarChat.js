@@ -1,7 +1,7 @@
 import { Avatar } from '@mui/material'
-import { setDoc, doc, collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import db from './firebase'
 
 export default function SidebarChat({ addnewchat, id, name }) {

@@ -2,17 +2,15 @@ import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from '@mui/
 import { Avatar, IconButton, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { collection, getDocs, onSnapshot, doc, getDoc, addDoc, serverTimestamp, orderBy, query, Query } from 'firebase/firestore'
-import { getDatabase, onValue, orderByChild, ref } from 'firebase/database'
+import { collection, getDocs, doc, getDoc, addDoc, serverTimestamp, orderBy, query} from 'firebase/firestore'
 import db from './firebase'
 import { useStateValue } from './Stateprovider'
-import { FirebaseError } from 'firebase/app'
 
 export default function Chat() {
 
     const [seed, set_seed] = useState("")
 
-    const [{user} , dispatch]  = useStateValue()
+    const [{user} ]  = useStateValue()
 
     const [roomName, setroomName] = useState("")
 
@@ -33,6 +31,7 @@ export default function Chat() {
             name: user.displayName,
             timestamp: serverTimestamp()
         });
+        chatRef()
         set_input("")
     }
 
@@ -103,7 +102,7 @@ export default function Chat() {
             </div>
             <div className='chat__body'>
                 {messages.map((message)=>(
-                    <p className={`chat__message ${(message.name == user.displayName) && "chat__reciever"} `}>
+                    <p className={`chat__message ${(message.name === user.displayName) && "chat__reciever"} `}>
                         <span className='chat__name'>
                             {message.name}
                         </span>
