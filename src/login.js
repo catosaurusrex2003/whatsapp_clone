@@ -7,6 +7,9 @@ import { useStateValue } from './Stateprovider';
 import { actionTypes } from './Reducer';
 
 function Login() {
+    const [ dispatch] = useStateValue()
+
+
 
     function signIn() {
         const provider = new GoogleAuthProvider();
@@ -26,7 +29,7 @@ function Login() {
     return (
         <div className='login_master_div'>
             <div className="login_container" >
-                <img src={whatsapp_logo} alt = {"no image found"}/>
+                <img src={whatsapp_logo} alt = {"no image found"} />
                 <div className="login_text">
                     <h1>Sign in to Purple Whatsapp</h1>
 
