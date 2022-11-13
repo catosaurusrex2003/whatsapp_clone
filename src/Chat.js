@@ -69,6 +69,7 @@ export default function Chat() {
             // }
 
     }
+    unsub()
       return () => {
         unsub()
       }

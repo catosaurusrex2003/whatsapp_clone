@@ -18,6 +18,7 @@ export default function Sidebar() {
   const [{user} ,]  = useStateValue()
 
   useEffect(() => { 
+    
     async function getRooms() {
       const Rooms = collection(db, 'rooms');
       console.log("in 1")
@@ -32,6 +33,7 @@ export default function Sidebar() {
       ) 
     }
     getRooms()
+
     return () => {
       getRooms()
     }
