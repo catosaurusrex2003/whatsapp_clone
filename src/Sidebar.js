@@ -20,7 +20,9 @@ export default function Sidebar() {
   useEffect(() => { 
     async function getRooms() {
       const Rooms = collection(db, 'rooms');
+      console.log("in 1")
       const roomSnapshot = await getDocs(Rooms);
+      console.log("in 2")
       set_rooms(roomSnapshot.docs.map(doc => (
         {
           id : doc.id,
