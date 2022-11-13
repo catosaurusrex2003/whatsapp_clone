@@ -12,7 +12,6 @@ function App() {
 
   const [{user} , dispatch] = useStateValue()
 
-
   return (
     <div className="app">
       {!user ? <Login/>
@@ -23,7 +22,7 @@ function App() {
             <Routes>
               <Route path='/rooms/:roomsId'
                 element={
-                  <Chat />
+                  <Chat  />
                 }
               />
               <Route path='/'

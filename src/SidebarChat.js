@@ -27,9 +27,10 @@ export default function SidebarChat({ addnewchat, id, name }) {
         set_seed(Math.floor(Math.random() * 5000))
     }, [])
 
+
     return !addnewchat ? (
         <Link to={`/rooms/${id}`}>
-            <div className='sidebarChat'>
+            <div className='sidebarChat' onClick = {()=>{console.log("meow")}}>
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className='sidebarChat__info'>
                     <h2>{name}</h2>

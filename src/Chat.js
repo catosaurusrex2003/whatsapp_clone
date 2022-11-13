@@ -2,7 +2,7 @@ import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from '@mui/
 import { Avatar, IconButton, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { collection, getDocs, onSnapshot, doc, getDoc, addDoc, serverTimestamp, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot, doc, getDoc, addDoc, serverTimestamp, orderBy, query, Query } from 'firebase/firestore'
 import { getDatabase, onValue, orderByChild, ref } from 'firebase/database'
 import db from './firebase'
 import { useStateValue } from './Stateprovider'
@@ -20,7 +20,7 @@ export default function Chat() {
 
     const [messages, set_messages] = useState([])
 
-    const { roomsId } = useParams()
+    let {roomsId} = useParams()    
 
     // console.log("user is : ",user)
 
@@ -33,13 +33,8 @@ export default function Chat() {
             name: user.displayName,
             timestamp: serverTimestamp()
         });
-
-        
-
         set_input("")
     }
-
-
 
     useEffect(() => {
         // if (roomsId) {
@@ -53,9 +48,8 @@ export default function Chat() {
                 // this code below gives the id of the message we want to access
                 // this is to access a collection
                 
-                const DataCollectionref = collection(db, `/rooms/${roomsId}/messages`)
-                query(DataCollectionref, orderBy("timestamp"))
-                const data_got = await getDocs(DataCollectionref , orderByChild("timestamp"))
+                const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`) , orderBy("timestamp"))
+                const data_got = await getDocs(DataCollectionref)
                 console.log(data_got.docs)
                 const imp_data = data_got.docs
                 
@@ -71,7 +65,9 @@ export default function Chat() {
                 // const docRef = doc(db, "rooms", roomsId, "messages", messages_id)
                 // const docSnap = await getDoc(docRef)
                 // console.log(docSnap.data())
-                                
+                      
+            // }
+
     }
       return () => {
         unsub()
@@ -79,14 +75,8 @@ export default function Chat() {
     }, [roomsId])
 
     useEffect(() => {
-    //   console.log("messages are :",messages[1].name)
-    
-    }, [messages])
-    
-
-    useEffect(() => {
         set_seed(Math.floor(Math.random() * 5000))
-    }, [])
+    }, [roomsId])
 
     return (
         <div className='chat'>
