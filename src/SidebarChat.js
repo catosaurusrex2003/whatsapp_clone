@@ -11,7 +11,6 @@ export default function SidebarChat({ addnewchat, id, name }) {
 
 
     async function createchat() {
-
         const roomName = prompt("please enter a name for a chat")
         if (roomName) {
             // do some clever database stuff
@@ -21,7 +20,6 @@ export default function SidebarChat({ addnewchat, id, name }) {
             });
             console.log("Document written with ID: ", docRef.id);
         }
-
     }
 
     useEffect(() => {

@@ -7,7 +7,7 @@ import { useStateValue } from './Stateprovider';
 import { actionTypes } from './Reducer';
 
 function Login() {
-    const [{user}, dispatch] = useStateValue()
+    const [{}, dispatch] = useStateValue()
 
 
 
