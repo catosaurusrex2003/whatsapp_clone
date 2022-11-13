@@ -31,7 +31,8 @@ function Login() {
             <div className="login_container" >
                 <img src={whatsapp_logo} alt = {"no image found"} />
                 <div className="login_text">
-                    <h1>Sign in to Purple Whatsapp</h1>
+                    <h1>Sign in to Whatsdown</h1>
+                    <span>name suggested by shantanu sakpal</span>
 
                 </div>
                 <Button type="submit" onClick={signIn} >
