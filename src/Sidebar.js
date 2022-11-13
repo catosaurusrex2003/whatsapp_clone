@@ -65,6 +65,7 @@ export default function Sidebar() {
       </div>
       <div className='sidebar__chats'>
         <SidebarChat addnewchat onClick = {createChat}/>
+        {console.log("this is the new production")}
         {rooms.map((room)=>{
           console.log("room data is ",room.data)
           return(
