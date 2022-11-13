@@ -3,6 +3,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { Link} from 'react-router-dom'
 import db from './firebase'
+import { v4 as uuid } from 'uuid';
 
 export default function SidebarChat({ addnewchat, id, name }) {
 
@@ -30,7 +31,7 @@ export default function SidebarChat({ addnewchat, id, name }) {
 
     return !addnewchat ? (
         <Link to={`/rooms/${id}`}>
-            <div className='sidebarChat' onClick = {()=>{console.log("meow")}}>
+            <div className='sidebarChat' onClick = {()=>{console.log("meow")}} key = {uuid()}>
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className='sidebarChat__info'>
                     <h2>{name}</h2>

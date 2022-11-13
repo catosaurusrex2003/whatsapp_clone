@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import { collection, getDocs, doc, getDoc, addDoc, serverTimestamp, orderBy, query} from 'firebase/firestore'
 import db from './firebase'
 import { useStateValue } from './Stateprovider'
+import { v4 as uuid } from 'uuid';
 
 export default function Chat() {
 
@@ -102,7 +103,7 @@ export default function Chat() {
             </div>
             <div className='chat__body'>
                 {messages.map((message)=>(
-                    <p className={`chat__message ${(message.name === user.displayName) && "chat__reciever"} `}>
+                    <p className={`chat__message ${(message.name === user.displayName) && "chat__reciever"} `} key = {uuid()} >
                         <span className='chat__name'>
                             {message.name}
                         </span>
