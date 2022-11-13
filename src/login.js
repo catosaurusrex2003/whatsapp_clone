@@ -3,16 +3,11 @@ import React from 'react'
 import whatsapp_logo from "./assets/whatsapp_logo.svg"
 import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithPopup } from "firebase/auth";
-import {provider} from "./firebase.js"
 import { useStateValue } from './Stateprovider';
 import { actionTypes } from './Reducer';
 
-// C:\Users\mohammed mehdi\OneDrive\Desktop\codeplay\whatsapp_clone\src\assets\whatsapp_logo.svg
-
 function Login() {
     const [{}, dispatch] = useStateValue()
-
-
 
     function signIn() {
         const provider = new GoogleAuthProvider();

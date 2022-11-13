@@ -1,5 +1,3 @@
-// import { Switch } from '@mui/material';
-
 import { Route, Routes, BrowserRouter} from 'react-router-dom';
 import './App.css';
 import Chat from './Chat';
