@@ -11,8 +11,6 @@ export default function Chat() {
 
     const [seed, set_seed] = useState("")
 
-    const [triggerstate , set_triggerstate] = useState()
-
     const [{user} ]  = useStateValue()
 
     const [roomName, setroomName] = useState("")
@@ -30,13 +28,12 @@ export default function Chat() {
         console.log("you typed ", input)
 
         const chatRef = await addDoc(collection(db, `/rooms/${roomsId}/messages`), {
-            message:e.target.value,
+            message:input,
             name: user.displayName,
             timestamp: serverTimestamp()
         });
         chatRef()
         set_input("")
-        set_triggerstate((prev)=>(prev+1))
     }
 
     useEffect(() => {
@@ -76,7 +73,7 @@ export default function Chat() {
       return () => {
         unsub()
       }
-    }, [roomsId,triggerstate])
+    }, [roomsId])
 
     useEffect(() => {
         set_seed(Math.floor(Math.random() * 5000))
@@ -91,7 +88,7 @@ export default function Chat() {
 
                 <div className='chat__headerinfo'>
                     <h3>{roomName}</h3>
-                    <p>last seen at ...</p>
+                    <p>last seen at ... </p>
                 </div>
                 <div className='chat__headerRight'>
                     <IconButton>
