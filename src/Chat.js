@@ -2,7 +2,7 @@ import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from '@mui/
 import { Avatar, IconButton, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { collection, getDocs, doc, getDoc, addDoc, serverTimestamp, orderBy, query} from 'firebase/firestore'
+import { collection, getDocs, doc, getDoc, addDoc, serverTimestamp, orderBy, query } from 'firebase/firestore'
 import db from './firebase'
 import { useStateValue } from './Stateprovider'
 import { v4 as uuid } from 'uuid';
@@ -11,68 +11,61 @@ export default function Chat() {
 
     const [seed, set_seed] = useState("")
 
-    const [{user} ]  = useStateValue()
+    const [{ user }] = useStateValue()
 
     const [roomName, setroomName] = useState("")
 
     const [input, set_input] = useState("")
 
     const [messages, set_messages] = useState([])
-
-    let {roomsId} = useParams()    
-
+    let { roomsId } = useParams()
     // console.log("user is : ",user)
-
     async function sendmessage(e) {
         e.preventDefault();
         console.log("you typed ", input)
-
         const chatRef = await addDoc(collection(db, `/rooms/${roomsId}/messages`), {
-            message:input,
+            message: input,
             name: user.displayName,
             timestamp: serverTimestamp()
         });
-        chatRef()
         set_input("")
+        const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`), orderBy("timestamp"))
+        const data_got = await getDocs(DataCollectionref)
+        console.log(data_got.docs)
+        const imp_data = data_got.docs
+        set_messages(imp_data.map(something =>
+            something.data()
+        ))
     }
-
     useEffect(() => {
         // if (roomsId) {
-            const unsub = async () => {
-                const roomRef = doc(db, "rooms", roomsId)
-                const roomSnap = await getDoc(roomRef)
-                setroomName(roomSnap.data().name)
+        const unsub = async () => {
+            const roomRef = doc(db, "rooms", roomsId)
+            const roomSnap = await getDoc(roomRef)
+            setroomName(roomSnap.data().name)
+            // this code below gives the id of the message we want to access
+            // this is to access a collection
+            const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`), orderBy("timestamp"))
+            const data_got = await getDocs(DataCollectionref)
+            console.log(data_got.docs)
+            const imp_data = data_got.docs
+            set_messages(imp_data.map(something =>
+                something.data()
+            ))
+            // const messages_id = data_got.docs[0].id
+            // code to access the things inside message
+            // this is to access a document
+            // const docRef = doc(db, "rooms", roomsId, "messages", messages_id)
+            // const docSnap = await getDoc(docRef)
+            // console.log(docSnap.data())
 
-
-                
-                // this code below gives the id of the message we want to access
-                // this is to access a collection
-                
-                const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`) , orderBy("timestamp"))
-                const data_got = await getDocs(DataCollectionref)
-                console.log(data_got.docs)
-                const imp_data = data_got.docs
-                
-                set_messages(imp_data.map(something =>
-                    something.data()
-                ))
-
-
-
-                // const messages_id = data_got.docs[0].id
-                // code to access the things inside message
-                // this is to access a document
-                // const docRef = doc(db, "rooms", roomsId, "messages", messages_id)
-                // const docSnap = await getDoc(docRef)
-                // console.log(docSnap.data())
-                      
             // }
 
-    }
-    unsub()
-      return () => {
+        }
         unsub()
-      }
+        return () => {
+            unsub()
+        }
     }, [roomsId])
 
     useEffect(() => {
@@ -103,8 +96,8 @@ export default function Chat() {
                 </div>
             </div>
             <div className='chat__body'>
-                {messages.map((message)=>(
-                    <p className={`chat__message ${(message.name === user.displayName) && "chat__reciever"} `} key = {uuid()} >
+                {messages.map((message) => (
+                    <p className={`chat__message ${(message.name === user.displayName) && "chat__reciever"} `} key={uuid()} >
                         <span className='chat__name'>
                             {message.name}
                         </span>
@@ -114,7 +107,7 @@ export default function Chat() {
                         </span>
                     </p>
                 ))}
-                
+
             </div>
             <div className='chat__footer'>
                 <InsertEmoticon />
