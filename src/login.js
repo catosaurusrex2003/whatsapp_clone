@@ -32,7 +32,7 @@ function Login() {
                 <img src={whatsapp_logo} alt = {"no image found"} />
                 <div className="login_text">
                     <h1>Sign in to Whatsdown</h1>
-                    <span>name suggested by shantanu sakpal</span>
+                    <span>made by Mohammed Mehdi</span>
 
                 </div>
                 <Button type="submit" onClick={signIn} >
