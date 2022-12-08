@@ -37,6 +37,25 @@ export default function Chat() {
             something.data()
         ))
     }
+
+    async function refreshPage(){
+        console.log("interval called")
+        const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`), orderBy("timestamp"))
+        const data_got = await getDocs(DataCollectionref)
+        console.log(data_got.docs)
+        const imp_data = data_got.docs
+        set_messages(imp_data.map(something =>
+            something.data()
+        ))
+    }
+
+    useEffect(() => {
+      const intervalkey = setInterval(refreshPage,7000)
+      return () => {
+        clearInterval(intervalkey)
+      }
+    }, [])
+    
     useEffect(() => {
         // if (roomsId) {
         const unsub = async () => {
@@ -58,19 +77,39 @@ export default function Chat() {
             // const docRef = doc(db, "rooms", roomsId, "messages", messages_id)
             // const docSnap = await getDoc(docRef)
             // console.log(docSnap.data())
-
             // }
-
         }
+        set_seed(Math.floor(Math.random() * 5000))
         unsub()
         return () => {
             unsub()
         }
     }, [roomsId])
 
-    useEffect(() => {
-        set_seed(Math.floor(Math.random() * 5000))
-    }, [roomsId])
+    // useEffect(() => {
+    //     const inside_unsub = async () => {
+    //         const roomRef = doc(db, "rooms", roomsId)
+    //         const roomSnap = await getDoc(roomRef)
+    //         setroomName(roomSnap.data().name)
+    //         // this code below gives the id of the message we want to access
+    //         // this is to access a collection
+    //         const DataCollectionref = query(collection(db, `/rooms/${roomsId}/messages`), orderBy("timestamp"))
+    //         const data_got = await getDocs(DataCollectionref)
+    //         console.log(data_got.docs)
+    //         const imp_data = data_got.docs
+    //         set_messages(imp_data.map(something =>
+    //             something.data()
+    //         ))
+    //     }
+    //     const myInterval = setInterval(inside_unsub(), 5000);
+
+    //     return () => {
+    //         clearInterval(myInterval)
+    //     }
+    // }, [])
+
+
+
 
     return (
         <div className='chat'>
